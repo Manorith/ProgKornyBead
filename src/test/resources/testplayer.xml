@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<pplayer>
+    <name>akaka</name>
+    <knownquestions>
+        <question>Kérdés16</question>
+        <question>Kérdés2</question>
+        <question>Kérdés3</question>
+        <question>Kérdés11</question>
+        <question>Kérdés17</question>
+        <question>Kérdés6</question>
+        <question>Kérdés7</question>
+        <question>Kérdés8</question>
+        <question>Kérdés9</question>
+        <question>Kérdés10</question>
+        <question>Kérdés15</question>
+        <question>Kérdés14</question>
+        <question>Kérdés13</question>
+        <question>Kérdés12</question>
+    </knownquestions>
+</pplayer>

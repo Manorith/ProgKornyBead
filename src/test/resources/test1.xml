@@ -1,0 +1,14 @@
+<questions>
+	<question>
+		<text>Kérdés1</text>
+		<answers>
+			<answer>Válasz1</answer>
+			<answer>Válasz2</answer>
+			<answer>Válasz4</answer>
+			<answer>Válasz5</answer>
+		</answers>
+		<correct>jovalasz1</correct>
+		<difficulty>1</difficulty>
+		<type>type1</type>
+	</question>
+</questions>

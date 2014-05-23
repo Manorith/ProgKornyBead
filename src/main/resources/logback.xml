@@ -1,0 +1,73 @@
+<!-- Ha a scan attribútum értékét "true"-ra módosítjuk, akkor a Logback percenként 
+	ellenőrzi, hogy változott-e a konfigurációs állomány. Változás esetén megfelelően 
+	igazítja hozzá a beállításokat. Az állomány így akár futásidőben is módosítható. -->
+<configuration scan="false">
+
+	<!-- A konzolon minden eseményt naplózunk -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm} %-5level %logger{36}
+				- %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- Az állományba csak adott szintű vagy annál magasabb szintű eseményeket 
+		naplózunk (a jelenlegi beállítás esetén ERROR és WARN szintű eseményeket) -->
+	<appender name="LOG_HISTORY" class="ch.qos.logback.core.FileAppender">
+		<file>target/log/LOG_HISTORY.log</file>
+		<append>true</append>
+		<encoder>
+			<pattern>%d %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+
+	<appender name="ERRORLOG" class="ch.qos.logback.core.FileAppender">
+		<file>target/log/ERRORLOG.log</file>
+		<append>false</append>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="all_the_answers_ever_failed" class="ch.qos.logback.core.FileAppender">
+		<file>target/log/all_the_answers_ever_failed.log</file>
+		<append>true</append>
+		<filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+			<evaluator class="ch.qos.logback.classic.boolex.GEventEvaluator">
+				<expression>e.message.toLowerCase().contains("false")</expression>
+			</evaluator>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<encoder>
+			<pattern>%-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+
+	<!-- A gyökér logger mindent naplóz (a konzolra és az állományokba is) -->
+	<root level="ALL">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="LOG_HISTORY" />
+		<appender-ref ref="ERRORLOG" />
+		<appender-ref ref="all_the_answers_ever_failed" />
+	</root>
+
+	<!-- Az alábbi logger mindent a konzolra naplóz. Az additivity="false" azt 
+		jelenti, hogy a logger-be naplózott események nem adódnak tovább a hierarchiában 
+		fölötte lévő logger objektumokhoz. Az attribútum értékét "true"-ra kell módosítani 
+		ahhoz, hogy az események eljussanak a gyökér logger-hez, így az állományokban 
+		is megjelenjenek. -->
+	<logger name="my.Main" level="ALL" additivity="false">
+		<appender-ref ref="STDOUT"/>
+	</logger>
+
+</configuration>
