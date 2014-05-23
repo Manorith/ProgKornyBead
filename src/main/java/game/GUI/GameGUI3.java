@@ -323,7 +323,7 @@ public class GameGUI3 extends JFrame {
 
 		MrVago.fail();
 
-		JOptionPane.showMessageDialog(null, "You looose nigga", "", 1);
+		JOptionPane.showMessageDialog(null, "You lost", "", 1);
 
 		JLabel prizeLabel = new JLabel("Prize:");
 		prizeLabel.setBounds(30, 120, 70, 15);
@@ -339,6 +339,8 @@ public class GameGUI3 extends JFrame {
 	}
 
 	public void renderStop() {
+		MrVago.saveCurrentPlayer("pplayer.xml");
+		
 		contentPane.remove(panel);
 		contentPane.remove(panel_1);
 		contentPane.remove(panel_2);
@@ -409,6 +411,8 @@ public class GameGUI3 extends JFrame {
 				.getCurrentPlayer().getScore()));
 		prizeNumber.setBounds(120, 120, 70, 15);
 		panel.add(prizeNumber);
+		
+		MrVago.saveCurrentPlayer("pplayer.xml");
 
 		validate();
 		repaint();

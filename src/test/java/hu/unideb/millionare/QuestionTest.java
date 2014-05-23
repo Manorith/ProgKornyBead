@@ -22,7 +22,7 @@ public class QuestionTest {
 	private static Question dummyQuestion;
 	private static LinkedList<Answer> answers = null;
 	private static Answer correct = new Answer("lel");
-	
+
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
 	@Before
@@ -40,7 +40,6 @@ public class QuestionTest {
 		dummyQuestion.setDisplayAnswers();
 
 	}
-
 
 	@Test
 	public void testSetDisplayAnswer3() {
@@ -70,33 +69,33 @@ public class QuestionTest {
 		}
 
 	}
-	
+
 	@Test
-	public void testGetDifficulty(){
+	public void testGetDifficulty() {
 		assertEquals(dummyQuestion.getDifficulty(), 1);
 	}
-	
+
 	@Test
-	public void testSetDifficulty(){
+	public void testSetDifficulty() {
 		dummyQuestion.setDifficulty(10);
 		assertEquals(dummyQuestion.getDifficulty(), 10);
 	}
-	
+
 	@Test
-	public void testGetAnswers(){
+	public void testGetAnswers() {
 		assertEquals(dummyQuestion.getAnswers(), answers);
 	}
-	
+
 	@Test
-	public void testAddAnswer(){
+	public void testAddAnswer() {
 		Answer addedOne = new Answer("Stand Alone Complex");
 		answers.add(addedOne);
 		dummyQuestion.addAnswer("Stand Alone Complex");
 		assertEquals(dummyQuestion.getAnswers(), answers);
 	}
-	
+
 	@Test
-	public void testRemoveAnswer(){
+	public void testRemoveAnswer() {
 		try {
 			dummyQuestion.removeAnswer("Moses supposes");
 		} catch (noSuchAnswerException e) {
@@ -104,21 +103,10 @@ public class QuestionTest {
 		}
 		assertEquals(dummyQuestion.getAnswers(), answers);
 	}
-	
+
 	@Test(expected = noSuchAnswerException.class)
-	public void testRemoveAnswer2() throws noSuchAnswerException{
-			dummyQuestion.removeAnswer("I dont even exist:(");
-	}
-	
-	@Test
-	public void testPrintAnswer(){
-		System.setOut(new PrintStream(outContent));
-		
-		String s = question + ":\n" + correct + "\n" + "Moses supposes false" + "\n" + "his toeses false" + "\n";
-		dummyQuestion.printAnswer();
-		assertEquals(outContent.toString(), s);
-		
-		System.setOut(null);
+	public void testRemoveAnswer2() throws noSuchAnswerException {
+		dummyQuestion.removeAnswer("I dont even exist:(");
 	}
 
 }
